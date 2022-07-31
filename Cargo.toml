@@ -1,0 +1,32 @@
+[package]
+name = "stm32-test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bare-metal = "0.2.5"
+cortex-m = "0.6.2" # Access to the generic ARM peripherals
+nb = "0.1.2" # Library for a non-blocking i/o layer with futures and async/wait
+cortex-m-rt = "0.6.12" # Startup code for the ARM Core
+
+[dependencies.stm32f4xx-hal]
+features = ["stm32f411", "rt"]
+version = "0.7.0"
+
+[dev-dependencies]
+panic-halt = "0.2.0" # Panic handler
+numtoa = "0.2.3" # Number Convetion to Strings without Heap-Location
+vcell = "0.1.2" # Mutable memory locations with volatile read/write operations
+volatile-register = "0.2.0" # Volatile access to memory mapped hardware registers
+
+[features]
+default = ["rt"]
+rt = []
+
+[profile.dev]
+debug = true
+
+[profile.release]
+debug = true
+lto = true
+opt-level = "s"
